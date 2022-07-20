@@ -43,14 +43,14 @@ namespace TimeSheet.Api.Controllers
             return Ok();
         }
 
-        [HttpPut("updateactivity")]
+        [HttpPut("activities")]
         public async Task<ActionResult> UpdateActivity(UpdateActivityCommand updateActivityCommand)
         {
             await _commandUpdateActivityHandler.HandleAsync(updateActivityCommand);
             return Ok();
         }
 
-        [HttpGet("gettimetraking")]
+        [HttpGet("activities")]
         public async Task<ActionResult> GetTimeTraking([FromQuery] GetTimeSheetByIdAndDate getTimeSheetByIdAndDate)
         {
             var result = await _queryTimeSheetByIdHandler.HandleAsync(getTimeSheetByIdAndDate);

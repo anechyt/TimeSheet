@@ -38,7 +38,7 @@ namespace TimeSheet.Api.Controllers
             return Ok();
         }
 
-        [HttpPut("updateroles")]
+        [HttpPut("roles")]
         public async Task<ActionResult> UpdateRole(UpdateRoleCommand updateRoleCommand)
         {
             await _commandUpdateRoleHandler.HandleAsync(updateRoleCommand);

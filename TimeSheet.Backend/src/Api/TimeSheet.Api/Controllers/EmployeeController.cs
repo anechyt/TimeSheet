@@ -37,7 +37,7 @@ namespace TimeSheet.Api.Controllers
             return Ok();
         }
 
-        [HttpPut("updateemployee")]
+        [HttpPut("employees")]
         public async Task<ActionResult> UpdateEmployee(UpdateEmployeeCommand updateEmployeeCommand)
         {
             await _commandUpdateEmployeeHandler.HandleAsync(updateEmployeeCommand);

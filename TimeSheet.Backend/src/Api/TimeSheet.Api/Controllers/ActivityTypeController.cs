@@ -37,7 +37,7 @@ namespace TimeSheet.Api.Controllers
             return Ok();
         }
 
-        [HttpPut("updateactivitytype")]
+        [HttpPut("activitytypes")]
         public async Task<ActionResult> UpdateActivityType(UpdateActivityTypeCommand updateActivityTypeCommand)
         {
             await _commandUpdateActivityTypeHandler.HandleAsync(updateActivityTypeCommand);

@@ -48,14 +48,14 @@ namespace TimeSheet.Api.Controllers
             return Ok();
         }
 
-        [HttpPut("updateproject")]
+        [HttpPut("projects")]
         public async Task<ActionResult> UpdateProject(UpdateProjectCommand updateProjectCommand)
         {
             await _commandUpdateProjectHandler.HandleAsync(updateProjectCommand);
             return Ok();
         }
 
-        [HttpGet("allprojects")]
+        [HttpGet("projects")]
         public async Task<ActionResult> GetAllProjects([FromQuery] GetProjects getProjects)
         {
             var result = await _queryProjectHandler.HandleAsync(getProjects);

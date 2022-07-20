@@ -31,7 +31,7 @@ namespace TimeSheet.Infrastructure.Services.View
 
             var dataActivity = await _timeSheetContext.Activity.Join(_timeSheetContext.Project,
                 c => c.ProjectId,
-                i => i.Id, 
+                i => i.Id,
                 (c, i) => new
                 {
                     Project = c.Project.Name,
@@ -39,22 +39,27 @@ namespace TimeSheet.Infrastructure.Services.View
                     Role = c.Role.Name,
                     ActivityType = c.ActivityType.Name,
                     Employee = c.Employee.Name
-
                 }).ToListAsync();
 
             List<string> list = new List<string>();
             foreach (var activity in dataActivity)
             {
-                string result = $"{activity.ProjectDate} as a {activity.Role} {activity.Employee}" +
-                    $" worked on the {activity.Project} 8 hours {activity.ActivityType}" +
-                    $" but {activity.ProjectDate} as a {activity.Role} {activity.Employee}" +
-                    $" worked on the {activity.Project} 2 hours {activity.ActivityType} and 6 hours as a" +
-                    $" {activity.Role} on the {activity.Project} {activity.ActivityType}";
+                var result = ActivityTemplate(activity.Project, activity.ProjectDate, activity.Role, activity.ActivityType, activity.Employee);
                 list.Add(result);
             }
 
             var data = new DataServiceMessage(true, GoodResponse.GetSuccessfully, list);
             return data;
+        }
+
+        public string ActivityTemplate(string projectName, DateTime projectDate, string role, string activityType, string employeName)
+        {
+            string result = $"{projectDate} as a {role} {employeName}" +
+                    $" worked on the {projectName} 8 hours {activityType}" +
+                    $" but {projectDate} as a {role} {employeName}" +
+                    $" worked on the {projectName} 2 hours {activityType} and 6 hours as a" +
+                    $" {role} on the {projectName} {activityType}";
+            return result;
         }
 
         public Task<DataServiceMessage> GetTimeTrakingByIdAndWeek(int id, int week)
