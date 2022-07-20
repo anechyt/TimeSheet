@@ -1,25 +1,21 @@
-﻿using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using TimeSheet.Application.Abstraction;
 using TimeSheet.Application.Contracts.Proccesing;
-using TimeSheet.Application.Dto;
 using TimeSheet.Application.Mapper;
 
 namespace TimeSheet.Application.Commands.Employee.CreateEmployee
 {
-    public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, DataServiceMessage>
+    public class CreateEmployeeCommandHandler : ICommandHandler<CreateEmployeeCommand>
     {
         private readonly IEmployeeProccesing _employeeProccesing;
         public CreateEmployeeCommandHandler(IEmployeeProccesing employeeProccesing)
         {
             _employeeProccesing = employeeProccesing;
         }
-        public Task<DataServiceMessage> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
+        public async Task HandleAsync(CreateEmployeeCommand request)
         {
             var mapper = Mapping.CreateCommandEmployee(request);
-            var data = _employeeProccesing.CreateEmployeeAsync(mapper);
-
-            return data;
+            await _employeeProccesing.CreateEmployeeAsync(mapper);
         }
     }
 }

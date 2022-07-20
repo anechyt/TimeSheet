@@ -1,25 +1,21 @@
-﻿using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using TimeSheet.Application.Abstraction;
 using TimeSheet.Application.Contracts.Proccesing;
-using TimeSheet.Application.Dto;
 using TimeSheet.Application.Mapper;
 
 namespace TimeSheet.Application.Commands.Project.CreateProject
 {
-    public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, DataServiceMessage>
+    public class CreateProjectCommandHandler : ICommandHandler<CreateProjectCommand>
     {
         private readonly IProjectProccesing _projectProccesing;
         public CreateProjectCommandHandler(IProjectProccesing projectProccesing)
         {
             _projectProccesing = projectProccesing;
         }
-        public Task<DataServiceMessage> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
+        public async Task HandleAsync(CreateProjectCommand request)
         {
             var mapper = Mapping.CreateCommandProject(request);
-            var data = _projectProccesing.CreateProjectAsync(mapper);
-
-            return data;
+            await _projectProccesing.CreateProjectAsync(mapper);
         }
     }
 }

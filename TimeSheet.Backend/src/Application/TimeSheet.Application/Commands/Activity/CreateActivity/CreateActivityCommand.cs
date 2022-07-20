@@ -1,9 +1,8 @@
-﻿using MediatR;
-using TimeSheet.Application.Dto;
+﻿using TimeSheet.Application.Abstraction;
 
 namespace TimeSheet.Application.Commands.Activity.CreateActivity
 {
-    public class CreateActivityCommand : IRequest<DataServiceMessage>
+    public class CreateActivityCommand : ICommand
     {
         public int ProjectId { get; set; }
         public int RoleId { get; set; }

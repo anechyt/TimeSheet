@@ -1,13 +1,11 @@
-﻿using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using TimeSheet.Application.Abstraction;
 using TimeSheet.Application.Contracts.Proccesing;
-using TimeSheet.Application.Dto;
 using TimeSheet.Application.Mapper;
 
 namespace TimeSheet.Application.Commands.Role.CreateRole
 {
-    public class CreateRoleCommandHandler : IRequestHandler<CreateRoleCommand, DataServiceMessage>
+    public class CreateRoleCommandHandler : ICommandHandler<CreateRoleCommand>
     {
         private readonly IRoleProccesing _roleProccesing;
         public CreateRoleCommandHandler(IRoleProccesing roleProccesing)
@@ -15,12 +13,10 @@ namespace TimeSheet.Application.Commands.Role.CreateRole
             _roleProccesing = roleProccesing;
         }
 
-        public async Task<DataServiceMessage> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
+        public async Task HandleAsync(CreateRoleCommand request)
         {
             var mapper = Mapping.CreateCommandRole(request);
-            var data = await _roleProccesing.CreateRoleAsync(mapper);
-
-            return data;
+            await _roleProccesing.CreateRoleAsync(mapper);
         }
     }
 }

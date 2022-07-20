@@ -1,13 +1,11 @@
-﻿using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using TimeSheet.Application.Abstraction;
 using TimeSheet.Application.Contracts.Proccesing;
-using TimeSheet.Application.Dto;
 using TimeSheet.Application.Mapper;
 
 namespace TimeSheet.Application.Commands.Activity.CreateActivity
 {
-    public class CreateActivityCommandHandler : IRequestHandler<CreateActivityCommand, DataServiceMessage>
+    public class CreateActivityCommandHandler : ICommandHandler<CreateActivityCommand>
     {
         private readonly IActivityProccesing _activityProccesing;
         public CreateActivityCommandHandler(IActivityProccesing activityProccesing)
@@ -15,12 +13,10 @@ namespace TimeSheet.Application.Commands.Activity.CreateActivity
             _activityProccesing = activityProccesing;
         }
 
-        public Task<DataServiceMessage> Handle(CreateActivityCommand request, CancellationToken cancellationToken)
+        public async Task HandleAsync(CreateActivityCommand request)
         {
             var mapper = Mapping.CreateCommandActivity(request);
-            var data = _activityProccesing.CreateActivityAsync(mapper);
-
-            return data;
+            await _activityProccesing.CreateActivityAsync(mapper);
         }
     }
 }

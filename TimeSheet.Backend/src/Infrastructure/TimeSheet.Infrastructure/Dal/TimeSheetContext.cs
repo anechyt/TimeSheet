@@ -38,7 +38,7 @@ namespace TimeSheet.Infrastructure.Dal
                 .HasConstraintName("FK_Activity_EmployeeId");
             });
 
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
     }
 }

@@ -1,10 +1,9 @@
-﻿using MediatR;
-using System;
-using TimeSheet.Application.Dto;
+﻿using System;
+using TimeSheet.Application.Abstraction;
 
 namespace TimeSheet.Application.Commands.Employee.CreateEmployee
 {
-    public class CreateEmployeeCommand : IRequest<DataServiceMessage>
+    public class CreateEmployeeCommand : ICommand
     {
         public string Name { get; set; }
         public string Sex { get; set; }
