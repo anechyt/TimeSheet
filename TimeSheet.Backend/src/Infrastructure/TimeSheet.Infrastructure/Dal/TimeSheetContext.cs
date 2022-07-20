@@ -31,6 +31,11 @@ namespace TimeSheet.Infrastructure.Dal
                 .WithMany(p => p.Activities)
                 .HasForeignKey(d => d.ActivityTypeId)
                 .HasConstraintName("FK_Activity_ActivityTypeId");
+
+                entity.HasOne(d => d.Employee)
+                .WithMany(p => p.Activities)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK_Activity_EmployeeId");
             });
 
             base.OnModelCreating(modelBuilder);
