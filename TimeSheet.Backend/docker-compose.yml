@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  timesheetdb:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
+  timesheet.api:
+    image: ${DOCKER_REGISTRY-}timesheetapi
+    build:
+      context: .
+      dockerfile: src/Api/TimeSheet.Api/Dockerfile
