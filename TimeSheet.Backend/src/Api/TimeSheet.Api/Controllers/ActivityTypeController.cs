@@ -30,8 +30,8 @@ namespace TimeSheet.Api.Controllers
             return Ok();
         }
 
-        [HttpDelete("deleteactivitytype")]
-        public async Task<ActionResult> DeleteActivityType(DeleteActivityTypeCommand deleteActivityTypeCommand)
+        [HttpDelete("activitytypes/{id}")]
+        public async Task<ActionResult> DeleteActivityType([FromQuery] DeleteActivityTypeCommand deleteActivityTypeCommand)
         {
             await _commandDeleteActivityTypeHandler.HandleAsync(deleteActivityTypeCommand);
             return Ok();

@@ -31,8 +31,8 @@ namespace TimeSheet.Api.Controllers
             return Ok();
         }
 
-        [HttpDelete("deleteroles")]
-        public async Task<ActionResult> DeleteRole(DeleteRoleCommand deleteRoleCommand)
+        [HttpDelete("roles/{id}")]
+        public async Task<ActionResult> DeleteRole([FromQuery] DeleteRoleCommand deleteRoleCommand)
         {
             await _commandDeleteRoleHandler.HandleAsync(deleteRoleCommand);
             return Ok();

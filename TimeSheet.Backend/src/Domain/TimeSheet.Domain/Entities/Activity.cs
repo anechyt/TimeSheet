@@ -16,7 +16,3 @@
 
     }
 }
-//For example, 25.06.2022 as a "Software Engineer" [Role] I worked on the "Project_3" [Project] 8
-//hours regular work [activity type] but 26.06.2022 as a "Software Architect"[Role] I worked on 
-//the "Project_2" [Project] 2 hours overtimes[activity type] and 6 hours as a "team lead" [Role]
-//on the "Project_1" [Project] regular work[activity type].

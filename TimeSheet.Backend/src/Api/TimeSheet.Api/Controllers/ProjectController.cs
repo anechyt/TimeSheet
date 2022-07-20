@@ -41,8 +41,8 @@ namespace TimeSheet.Api.Controllers
             return Ok();
         }
 
-        [HttpDelete("deleteproject")]
-        public async Task<ActionResult> DeleteProject(DeleteProjectCommand deleteProjectCommand)
+        [HttpDelete("projects/{id}")]
+        public async Task<ActionResult> DeleteProject([FromQuery] DeleteProjectCommand deleteProjectCommand)
         {
             await _commandDeleteProjectHandler.HandleAsync(deleteProjectCommand);
             return Ok();

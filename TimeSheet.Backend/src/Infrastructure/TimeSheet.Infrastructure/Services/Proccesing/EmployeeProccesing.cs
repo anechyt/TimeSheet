@@ -52,7 +52,7 @@ namespace TimeSheet.Infrastructure.Services.Proccesing
 
             var mapper = Mapping.UpdateEmployeeDtoToEmployee(updateEmployeeDto);
 
-            _timeSheetContext.Employee.Update(employee);
+            _timeSheetContext.Employee.Update(mapper);
             await _timeSheetContext.SaveChangesAsync();
 
             var data = new DataServiceMessage(true, GoodResponse.UpdatedSuccessfully, mapper);
